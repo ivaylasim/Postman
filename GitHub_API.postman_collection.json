@@ -1,0 +1,356 @@
+{
+	"info": {
+		"_postman_id": "2616f1cb-c2a3-4aa5-b614-46645a20dc27",
+		"name": "GitHub_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17680626"
+	},
+	"item": [
+		{
+			"name": "Issues",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "GET_Single_Issue",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Issue number is correct\", function() {\r",
+											"    const body = pm.response.json();\r",
+											"    pm.expect(body.number, \"Number property\").equals(1);\r",
+											"    })\r",
+											"\r",
+											"pm.test(\"Issue is open\", function() {\r",
+											"    const body = pm.response.json();\r",
+											"    pm.expect(body.state, \"State property\").equals(\"open\");\r",
+											"    })\r",
+											"\r",
+											"pm.test(\"Issue was created by correct user\", function() {\r",
+											"    const body = pm.response.json();\r",
+											"    pm.expect(body.user.login, \"State property\").equals(\"ivaylasim\");\r",
+											"    })"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.github.com/repos/ivaylasim/Postman/issues/1",
+									"protocol": "https",
+									"host": [
+										"api",
+										"github",
+										"com"
+									],
+									"path": [
+										"repos",
+										"ivaylasim",
+										"Postman",
+										"issues",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET_Single_Repo",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check repo name\", function() {\r",
+											"    const body = pm.response.json();\r",
+											"    pm.expect(body.name, \"Name property\").equals(\"Postman\")\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.github.com/repos/ivaylasim/Postman",
+									"protocol": "https",
+									"host": [
+										"api",
+										"github",
+										"com"
+									],
+									"path": [
+										"repos",
+										"ivaylasim",
+										"Postman"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET_All_Issues",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\",() => {pm.expect(pm.response.code).equal(200)}\r",
+											" );\r",
+											"\r",
+											"console.log(\"Response: \", pm.response)\r",
+											"\r",
+											"pm.test(\"Status code is 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(pm.response.code).equals(200);\r",
+											"\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.github.com/repos/ivaylasim/Postman/issues",
+									"protocol": "https",
+									"host": [
+										"api",
+										"github",
+										"com"
+									],
+									"path": [
+										"repos",
+										"ivaylasim",
+										"Postman",
+										"issues"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get_First_Issue_Label",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.github.com/repos/ivaylasim/Postman/issues/1/labels",
+									"protocol": "https",
+									"host": [
+										"api",
+										"github",
+										"com"
+									],
+									"path": [
+										"repos",
+										"ivaylasim",
+										"Postman",
+										"issues",
+										"1",
+										"labels"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get_First_Issue",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.github.com/repos/ivaylasim/Postman/issues/1",
+									"protocol": "https",
+									"host": [
+										"api",
+										"github",
+										"com"
+									],
+									"path": [
+										"repos",
+										"ivaylasim",
+										"Postman",
+										"issues",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST",
+					"item": [
+						{
+							"name": "Create_issue",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Issue number and title are correct\", function() {\r",
+											"    const body = pm.response.json;\r",
+											"    pm.expect(response.number, \"Number property\").greaterThan(0);\r",
+											"    pm.expect(body.title, \"Title property\").equals(\"issue 5\")\r",
+											"    \r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "ivaylasim",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "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",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"issue 5\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.github.com/repos/ivaylasim/Postman/issues",
+									"protocol": "https",
+									"host": [
+										"api",
+										"github",
+										"com"
+									],
+									"path": [
+										"repos",
+										"ivaylasim",
+										"Postman",
+										"issues"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create_issue_WithLabels",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "ivaylasim",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "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",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Issue with labels\",\r\n    \"labels\": [\r\n        \"bug\",\r\n        \"priority: Critical\",\r\n        \"Ivayla's label\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.github.com/repos/ivaylasim/Postman/issues",
+									"protocol": "https",
+									"host": [
+										"api",
+										"github",
+										"com"
+									],
+									"path": [
+										"repos",
+										"ivaylasim",
+										"Postman",
+										"issues"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Repos",
+			"item": [
+				{
+					"name": "GET requests",
+					"item": [
+						{
+							"name": "GET_All_Repos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.github.com/repos/ivaylasim/Postman/issues",
+									"protocol": "https",
+									"host": [
+										"api",
+										"github",
+										"com"
+									],
+									"path": [
+										"repos",
+										"ivaylasim",
+										"Postman",
+										"issues"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
